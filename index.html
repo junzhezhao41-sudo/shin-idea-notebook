@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>拾念 · 灵感记录</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: #252522;
+      background: #f8f7f4;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 56px 24px 72px;
+    }
+
+    .page {
+      width: min(100%, 680px);
+      margin: 0 auto;
+    }
+
+    .brand {
+      margin: 0 0 54px;
+      color: #77766f;
+      font-size: 13px;
+      letter-spacing: 0.16em;
+    }
+
+    .intro {
+      margin-bottom: 34px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 7vw, 44px);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: #77766f;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .composer {
+      padding: 22px;
+      border: 1px solid #e9e7e1;
+      border-radius: 18px;
+      background: #fffefa;
+      box-shadow: 0 8px 30px rgb(42 39 30 / 3%);
+    }
+
+    textarea {
+      display: block;
+      width: 100%;
+      min-height: 132px;
+      padding: 4px 2px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: 15px;
+      line-height: 1.8;
+      resize: vertical;
+    }
+
+    textarea::placeholder {
+      color: #aaa89f;
+    }
+
+    textarea:focus-visible {
+      outline: 2px solid #d8d4c9;
+      outline-offset: 5px;
+      border-radius: 3px;
+    }
+
+    .composer-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 16px;
+      border-top: 1px solid #efede7;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 12px;
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 160ms ease, color 160ms ease;
+    }
+
+    button:focus-visible {
+      outline: 2px solid #77766f;
+      outline-offset: 3px;
+    }
+
+    .save-button {
+      background: #292925;
+      color: #fffefa;
+    }
+
+    .save-button:hover {
+      background: #484840;
+    }
+
+    .list-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 42px 2px 16px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .list-hint {
+      color: #99978e;
+      font-size: 12px;
+    }
+
+    .message {
+      min-height: 22px;
+      margin: 14px 2px 0;
+      color: #77766f;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .message:empty {
+      display: none;
+    }
+
+    .message.error {
+      color: #9b453b;
+    }
+
+    .ideas {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .idea {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 21px;
+      border: 1px solid #eeece6;
+      border-radius: 16px;
+      background: #fffefa;
+    }
+
+    .idea-content {
+      min-width: 0;
+    }
+
+    .idea-text {
+      margin: 0;
+      overflow-wrap: anywhere;
+      font-size: 15px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+
+    .idea-date {
+      display: block;
+      margin-top: 12px;
+      color: #99978e;
+      font-size: 12px;
+    }
+
+    .delete-button {
+      flex: 0 0 auto;
+      min-height: 36px;
+      padding: 0 12px;
+      background: transparent;
+      color: #88867e;
+      font-size: 13px;
+    }
+
+    .delete-button:hover {
+      background: #f2f0eb;
+      color: #302f2b;
+    }
+
+    .empty-state {
+      padding: 30px 20px;
+      border: 1px dashed #dfdcd3;
+      border-radius: 16px;
+      color: #8b8980;
+      font-size: 14px;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 34px 18px 52px;
+      }
+
+      .brand {
+        margin-bottom: 42px;
+      }
+
+      .composer {
+        padding: 18px;
+      }
+
+      .idea {
+        gap: 10px;
+        padding: 17px 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <p class="brand">MY LITTLE NOTEBOOK</p>
+
+    <header class="intro">
+      <h1>拾念</h1>
+      <p class="subtitle">把一闪而过的想法，轻轻收好。</p>
+    </header>
+
+    <form class="composer" id="idea-form">
+      <textarea
+        id="idea-input"
+        aria-label="灵感内容"
+        placeholder="此刻有什么想法？写下来吧……"
+        required
+      ></textarea>
+      <div class="composer-footer">
+        <button class="save-button" type="submit">保存灵感</button>
+      </div>
+    </form>
+
+    <p class="message" id="message" role="status" aria-live="polite"></p>
+
+    <section aria-labelledby="list-title">
+      <div class="list-heading">
+        <h2 id="list-title">我的灵感</h2>
+        <span class="list-hint">只保存在这台设备的浏览器中</span>
+      </div>
+      <ul class="ideas" id="idea-list"></ul>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "shinian-ideas";
+    const form = document.getElementById("idea-form");
+    const input = document.getElementById("idea-input");
+    const list = document.getElementById("idea-list");
+    const message = document.getElementById("message");
+    let ideas = [];
+
+    function showMessage(text, isError = false) {
+      message.textContent = text;
+      message.classList.toggle("error", isError);
+    }
+
+    function saveIdeas(nextIdeas) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextIdeas));
+        return true;
+      } catch (error) {
+        showMessage("无法保存到浏览器。请检查浏览器存储设置或可用空间后重试。", true);
+        return false;
+      }
+    }
+
+    function renderIdeas() {
+      list.replaceChildren();
+
+      if (ideas.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "empty-state";
+        empty.textContent = "还没有灵感记录。写下第一条，留住此刻的想法。";
+        list.append(empty);
+        return;
+      }
+
+      ideas.forEach((idea) => {
+        const item = document.createElement("li");
+        item.className = "idea";
+
+        const content = document.createElement("div");
+        content.className = "idea-content";
+
+        const text = document.createElement("p");
+        text.className = "idea-text";
+        text.textContent = idea.text;
+
+        const date = document.createElement("time");
+        date.className = "idea-date";
+        date.dateTime = idea.createdAt;
+        date.textContent = new Date(idea.createdAt).toLocaleString("zh-CN", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "delete-button";
+        deleteButton.type = "button";
+        deleteButton.textContent = "删除";
+        deleteButton.setAttribute("aria-label", `删除灵感：${idea.text}`);
+        deleteButton.addEventListener("click", () => deleteIdea(idea.id));
+
+        content.append(text, date);
+        item.append(content, deleteButton);
+        list.append(item);
+      });
+    }
+
+    function deleteIdea(id) {
+      const nextIdeas = ideas.filter((idea) => idea.id !== id);
+      if (saveIdeas(nextIdeas)) {
+        ideas = nextIdeas;
+        showMessage("这条灵感已删除。");
+        renderIdeas();
+      }
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const text = input.value.trim();
+
+      if (!text) {
+        showMessage("先写下一点想法，再保存吧。", true);
+        input.focus();
+        return;
+      }
+
+      const idea = {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        text,
+        createdAt: new Date().toISOString()
+      };
+      const nextIdeas = [idea, ...ideas];
+
+      if (saveIdeas(nextIdeas)) {
+        ideas = nextIdeas;
+        input.value = "";
+        showMessage("灵感已保存。");
+        renderIdeas();
+      }
+    });
+
+    try {
+      const storedIdeas = localStorage.getItem(STORAGE_KEY);
+      if (storedIdeas !== null) {
+        const parsedIdeas = JSON.parse(storedIdeas);
+        if (!Array.isArray(parsedIdeas) || parsedIdeas.some((idea) =>
+          !idea || typeof idea.id !== "string" ||
+          typeof idea.text !== "string" ||
+          typeof idea.createdAt !== "string" ||
+          Number.isNaN(Date.parse(idea.createdAt))
+        )) {
+          throw new Error("Saved ideas have an invalid format.");
+        }
+        ideas = parsedIdeas;
+      }
+    } catch (error) {
+      showMessage("读取本地记录失败。浏览器存储不可用或记录格式异常。", true);
+    }
+
+    renderIdeas();
+  </script>
+</body>
+</html>
